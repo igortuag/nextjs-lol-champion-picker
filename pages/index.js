@@ -1,8 +1,34 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { useEffect, useState } from "react";
 
 export default function Home({ listOfChampionsJson }) {
+  const [selectedChampions, setSelectedChampions] = useState([]);
+
+  const handleAddList = (id) => {
+    if (selectedChampions.indexOf(id) === -1) {
+      setSelectedChampions([...selectedChampions, id]);
+    } else {
+      setSelectedChampions(selectedChampions.filter((item) => item !== id));
+    }
+  };
+
+  useEffect(() => {
+    const savedSelectedChampions = localStorage.getItem("selectedChampions");
+    if (savedSelectedChampions) {
+      setSelectedChampions(JSON.parse(savedSelectedChampions));
+    }
+  }, []);
+
+  useEffect(() => {
+    // save on local storage
+    localStorage.setItem(
+      "selectedChampions",
+      JSON.stringify(selectedChampions)
+    );
+  }, [selectedChampions]);
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -20,7 +46,18 @@ export default function Home({ listOfChampionsJson }) {
               href="https://nextjs.org/docs"
               className={styles.card}
             >
-              <h2>{champion.name}</h2>
+              <h2>
+                <label>
+                  <span>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleAddList(champion.id)}
+                      checked={selectedChampions.indexOf(champion.id) !== -1}
+                    />
+                  </span>
+                  {champion.name}
+                </label>
+              </h2>
               <Image
                 width={100}
                 height={100}
