@@ -46,24 +46,30 @@ export default function Home({ listOfChampionsJson }) {
               href="https://nextjs.org/docs"
               className={styles.card}
             >
-              <h2>
-                <label>
-                  <span>
-                    <input
-                      type="checkbox"
-                      onChange={() => handleAddList(champion.id)}
-                      checked={selectedChampions.indexOf(champion.id) !== -1}
-                    />
-                  </span>
-                  {champion.name}
-                </label>
-              </h2>
+              <h2>{champion.name}</h2>
               <Image
                 width={100}
                 height={100}
                 src={`http://ddragon.leagueoflegends.com/cdn/12.3.1/img/champion/${champion.image.full}`}
                 alt={`Small image of ${champion.name}`}
               />
+              <p>
+                <label>
+                  <input
+                    type="checkbox"
+                    onChange={() => handleAddList(champion.id)}
+                    checked={selectedChampions.indexOf(champion.id) !== -1}
+                  />
+                  chested
+                </label>
+              </p>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://u.gg/lol/champions/aram/${champion.id}-aram`}
+              >
+                Build aram →
+              </a>
             </div>
           ))}
         </div>
