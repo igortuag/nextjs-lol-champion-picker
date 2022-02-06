@@ -3,8 +3,6 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 export default function Home({ listOfChampionsJson }) {
-  console.log("listOfChampionsJson ::>>", listOfChampionsJson);
-
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -24,6 +22,12 @@ export default function Home({ listOfChampionsJson }) {
             >
               <h2>{champion.name}</h2>
               <p>{champion.title}</p>
+              <Image
+                width={100}
+                height={100}
+                src={`http://ddragon.leagueoflegends.com/cdn/12.3.1/img/champion/${champion.image.full}`}
+                alt={`Small image of ${champion.name}`}
+              />
             </div>
           ))}
         </div>
