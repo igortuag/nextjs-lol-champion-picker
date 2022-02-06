@@ -21,7 +21,6 @@ export default function Home({ listOfChampionsJson }) {
               className={styles.card}
             >
               <h2>{champion.name}</h2>
-              <p>{champion.title}</p>
               <Image
                 width={100}
                 height={100}
